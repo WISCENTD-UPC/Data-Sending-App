@@ -1,0 +1,22 @@
+#dhisDropDownMenu {
+	height:44px;
+	position:fixed;
+	z-index:15;
+	top:0;
+	left:0;
+	right:0;
+	padding-left:10px;
+	box-shadow:0 0 3px #222; 
+	background-color:#276696;
+}
+
+#headerBanner {
+	position: absolute;
+    top: 13px;
+    left: 55px;
+	background-image: url("../../../staticContent/logo_banner");
+	background-repeat: no-repeat;
+	width: auto;
+	height: auto;
+	cursor: pointer;
+}

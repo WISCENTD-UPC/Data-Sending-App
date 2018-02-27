@@ -1,0 +1,20 @@
+{
+    "version": "0.1",
+    "name": "Data sending",
+    "description": "Send data value sets to the server, also you will be able to download them.",
+    "launch_path": "index.html",
+	"appType": "APP",
+    "icons": {
+        "48": "img/send.png"
+    },
+    "developer": {
+        "name": "Pablo Ruiz",
+        "url": ""
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "*"
+        }
+    }
+}
