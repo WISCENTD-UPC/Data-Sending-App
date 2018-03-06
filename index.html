@@ -1,53 +1,48 @@
 <html> 
 <head>
+	<title>WISCC Data sending</title>
+    <!-- Stylesheets related to the menu -->
+    <link type="text/css" rel="stylesheet" href="../../../dhis-web-commons/font-awesome/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="../../../dhis-web-commons/css/menu.css">
 
-<title>WISCC Data sending</title>
-        <!-- Stylesheets related to the menu -->
-        <link type="text/css" rel="stylesheet" href="../../../dhis-web-commons/font-awesome/css/font-awesome.min.css"/>
-        <link type="text/css" rel="stylesheet" media="screen" href="../../../dhis-web-commons/css/menu.css">
-		<link type="text/css" rel="stylesheet" href="./styles/DHISHeader.css">
-		<!--Other stylesheets -->
-		<link type="text/css" rel="stylesheet" href="./styles/styles.css">
-		<!-- DHIS2 Settings initialization for a baseUrl that is used for the header menu -->
-        <script>
-            window.dhis2 = window.dhis2 || {};
-            dhis2.settings = dhis2.settings || {};
-            dhis2.settings.baseUrl = '';
-        </script>
-		<!-- Jquery include -->
-		<script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/jquery.min.js"></script>
-        <!-- Menu scripts -->
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.js"></script>
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.ui.js"></script>
-		<!-- Other scripts -->
-		<script src="./scripts/DHIS.js"></script>
-		<script src="./scripts/functions.js"></script>
+	<!--Other stylesheets -->
+	<link type="text/css" rel="stylesheet" href="./styles/styles.css">
+
+    <!-- DHIS2 Scripts -->
+    <script src="../../../dhis-web-core-resource/jquery/3.2.0/dist/jquery.js"></script>
+    <script src="../../../dhis-web-core-resource/react/15.3.2/react-with-touch-tap-plugin.min.js"></script>
+    <script src="../../../dhis-web-core-resource/rxjs/4.1.0/rx.lite.min.js"></script>
+    <script src="../../../dhis-web-core-resource/lodash/4.15.0/lodash.min.js"></script>
+    <script src="../../../dhis-web-core-resource/lodash-functional/1.0.1/lodash-functional.js"></script>
+    <script src="../../../dhis-web-core-resource/babel-polyfill/6.20.0/dist/polyfill.min.js"></script>
+    <script src="../../../dhis-web-core-resource/d2-ui/25.5.4/dist/header-bar.js"></script>
+
+    <!-- Bootstrap 4.0 -->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
+
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.7/bootstrap-notify.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script src="./scripts/ajaxMultiQueue.js"></script>
+    <script src="./scripts/DHIS.js"></script>
+    <script src="./scripts/functions.js"></script>
 </head>
 
 <body>
-		<!-- DHIS2 blue header menu -->
-        <div id="dhisDropDownMenu">
-		<img id="headerBanner" src="../../staticContent/logo_banner" 
-		onclick="window.location.href='../../../dhis-web-dashboard-integration/index.action'"></div>
+    <!-- DHIS2 blue header menu -->
+    <div id="header"></div>
+    <div id="headerMessage"></div>
+
+	<div id="mainContent" class="blue">
+		<div  style="text-align:center;">
+            <button id="downloadCSVButton" class="btn btngreen smallr sw" onclick="downloadCSV()">Download preview</button><br><br>
+            <div class="right">
+                <button id="downloadButton" class="btn btngreen smallr" onclick="tryDownload()">Send data</button>
+                <button id="helpButton" onclick="showHelp()" class="btn btnblue smallr">?</button><br>
+            </div>
+            <button id="downloadSummaryButton" class="btn btngreen smallr disabled sw" onclick="downloadSummary()">data-summary.json</button>
+            <button id="downloadAttachmentsButton" class="disabled btn btngreen smallr sw" onclick="downloadAttachments()">data-attachments.tar.gz</button>
 		</div>
-		
-		<!-- App start -->
-		<div class="blue">
-				<!-- Buttons -->
-				<div  style="text-align:center;">
-				<button id = "CSV" class="btn btngreen smallr sw" onclick="downloadCSV()">Download preview</button><br><br>
-					<div class="right">
-					<button id = "button" class="btn btngreen smallr" onclick="tryDownload()">Send data</button>
-					
-					<button id = "question" onclick="showHelp()" class="btn btnblue smallr">?</button><br>
-					
-					</div>
-					<button id = "summary" class="btn btngreen smallr disabled sw" onclick="downloadSummary()">data-summary.json</button>
-					<button id = "attachments" class="disabled btn btngreen smallr sw" onclick="downloadAttachments()">data-attachments.tar.gz</button>
-				</div>
-			<!-- Used to show help and error messages -->
-			<div id = "Messages" class="green"></div>
-		</div>
-		<!-- App end -->
+    </div>
 </body>
