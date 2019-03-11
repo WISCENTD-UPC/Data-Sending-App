@@ -12,26 +12,19 @@ The Data-Sending-Extractor-RS component is provided as an archived JavaEE execut
 
 ### Configuration files
 
-inbox.properties:
-
-```
-# Inbox Connection Properties
-url=http://localhost:8080/Data-Sending-Inbox/upload
-creationModality=global
-token=07b308b6-7b7d-43b9-94ae-7fbcaabaf59
-```
-
-dhisAPI.properties:
+connector.properties:
 
 ```
 # DHIS API Connection Properties
-# Connection to DHIS2
-server=http://localhost:9999/dhis
-secretClient=wiscc.dhis2connector:fb5c463ad-3aa4-b51f-923b-3fe3bfc7593
-tokenUrlParams=grant_type=password&username=admin&password=district
+server=http://localhost:8080/dhis
 user=admin:district
-# URL Params
-tokenQuery=/uaa/oauth/token
+
+# Inbox Connection Properties
+inbox_url=http://localhost:8080/Data-Sending-Inbox/upload
+auth_token=07b308b6-7b7d-43b9-94ae-7fbcaabaf59
+creationModality=global
+
+# Advanced parameters
 urlParamsExtraction=/api/dataValueSets
 urlDataValueSetsFields=fields=:all
 startDateParam=startDate=
@@ -41,6 +34,24 @@ params=skipPaging=true
 queryDataSet=/api/dataSets?fields=id,displayName&paging=false
 queryElement=/api/dataElements?fields=id,name&paging=false
 queryOrg=/api/me?fields=organisationUnits[id,name,code]&paging=false
+```
+
+control.properties:
+
+```
+lastExtractionDate=2000-01-01
+```
+
+postgresql.properties:
+
+```
+driverName=org.postgresql.Driver
+wisccControlDB=wisccControl
+postgresUrl=jdbc:postgresql://
+postgresHost=who-dev.essi.upc.edu
+postgresPort=5432
+username=user
+password=pass
 ```
 
 ### Technical explanation
@@ -53,30 +64,19 @@ queryOrg=/api/me?fields=organisationUnits[id,name,code]&paging=false
 
 The Data-Sending-Inbox component is provided as an archived JavaEE executable (war file) and meant to be deployed with Tomcat. We use one environment variable and a configuration file to adapt the software to the needs of each Data-Sending-Inbox instance.
 
-### Environment variables
-
-$WISCENTD_HOME: provides a host path to store the received files.
-
 ### Configuration files
 
 inbox.properties:
 
 ```
 # Storage configuration
-# Base Path allows two configurations:
-# 1) Relative: Routes to $WISCENTD_HOME + base_path (If WISCENTD_HOME is undeclared defaults to CATALINA_BASE)
-# 2) Absolute: Routes to the absolute path provided
-base_path=data-inbox
 # Login token that Inbox Servlet validates before accepting an upload request
-auth_token=a0b1c2d3-0p9o-45m6-22tr-65hgjjf38hr
+auth_token=07b308b6-7b7d-43b9-94ae-7fbcaabaf59
 ```
 
-base_path: String that defines the route to store the received files.
 auth_token: Token that server will check before accepting a request.
 
 ### Technical explanation
-
-Storage path: The Data-Sending-Inbox allows to define two kind of storage methods, the first one is relative to the union of the host path $WISCENTD_HOME environment variable with the subfolder(s) from base_path on the configuration file. The second is with an absolute path stored directly in the base_path property of the configuration file.
 
 Authentication token: The Data-Sending-Inbox before accepting a request checks for a valid token. The token is compared with a hardcoded value (hardcoded meaning not generated on the instance). The token is set through the configuration file.
 
