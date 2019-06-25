@@ -12,6 +12,8 @@ The Data-Sending-Extractor-RS component is provided as an archived JavaEE execut
 
 ### Configuration files
 
+Location: $CATALINA_BASE/wiscentd/config
+
 connector.properties:
 
 ```
@@ -40,18 +42,6 @@ control.properties:
 
 ```
 lastExtractionDate=2000-01-01
-```
-
-postgresql.properties:
-
-```
-driverName=org.postgresql.Driver
-wisccControlDB=wisccControl
-postgresUrl=jdbc:postgresql://
-postgresHost=who-dev.essi.upc.edu
-postgresPort=5432
-username=user
-password=pass
 ```
 
 ### Technical explanation
